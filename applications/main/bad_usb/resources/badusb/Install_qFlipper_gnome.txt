@@ -3,11 +3,12 @@ REM Declare ourselves as a generic usb keyboard
 
 REM This will install qFlipper on Linux/Gnome, using the latest AppImage package
 
-REM Open a terminal
+REM Open a terminal (tries common terminal emulators in order, since
+REM gnome-terminal is no longer installed by default on many distros)
 ALT F2
 DELAY 1000
-STRINGLN gnome-terminal --maximize
-DELAY 1000
+STRINGLN sh -c "gnome-console || kgx || ptyxis || gnome-terminal || konsole || xfce4-terminal || alacritty || kitty || foot || xterm -maximized &"
+DELAY 1500
 
 REM Ensure we have a folder to run executables from
 STRINGLN mkdir -p $HOME/.local/bin
@@ -36,7 +37,6 @@ STRINGLN update-desktop-database ~/.local/share/applications || true
 
 STRINGLN echo "
 ENTER
-REPEAT 60
 STRINGLN ==========================================================================================
 STRINGLN qFlipper has been installed to $HOME/.local/bin/
 STRINGLN It should appear in your Applications menu.
